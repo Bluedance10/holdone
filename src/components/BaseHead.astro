@@ -48,3 +48,44 @@ const fullTitle =
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={new URL(image, Astro.url)} />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://baoyuansoyi.com/#website",
+      "url": "https://baoyuansoyi.com",
+      "name": "抱元守一",
+      "alternateName": ["抱一", "BaoYuanSoYi"],
+      "description": "首席人生載體顧問｜載體重啟 · 生活美學 · 頻率對位。透過簡單的調整與練習，邀請您一同探索元氣與自主權。源自個人生命實證，歡迎有緣人前來深度交流。",
+      "inLanguage": "zh-Hant",
+      "publisher": {
+        "@id": "https://baoyuansoyi.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://baoyuansoyi.com/#organization",
+      "name": "步鹿丹思創意行銷有限公司",
+      "url": "https://baoyuansoyi.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://baoyuansoyi.com/favicon.svg"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://baoyuansoyi.com/#person",
+      "name": "抱元守一",
+      "alternateName": "首席人生載體顧問",
+      "jobTitle": "首席人生載體顧問",
+      "description": "載體重啟・生活美學・頻率對位。透過個人生命實證，陪伴高敏者與高淨值人士重新找回身體自主權。",
+      "url": "https://baoyuansoyi.com",
+      "worksFor": {
+        "@id": "https://baoyuansoyi.com/#organization"
+      }
+    }
+  ]
+}
+</script>
