@@ -1,6 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_BRAND, SITE_NAME_EN, NAV_LINKS, BOOKING_COPY } from '../consts';
+import { SITE_TITLE, SITE_NAME_EN, NAV_LINKS, BOOKING_COPY } from '../consts';
 // 導覽 CTA：預約席位
 ---
 
@@ -12,10 +12,10 @@ import { SITE_BRAND, SITE_NAME_EN, NAV_LINKS, BOOKING_COPY } from '../consts';
 		<a
 			href="/"
 			class="nav-brand-link group shrink-0 no-underline hover:no-underline"
-			aria-label={`${SITE_BRAND} ${SITE_NAME_EN} 首頁`}
+			aria-label={`${SITE_TITLE} ${SITE_NAME_EN} 首頁`}
 		>
 			<span class="nav-brand text-ink transition-colors group-hover:text-peach-deep">
-				{SITE_BRAND}
+				{SITE_TITLE}
 			</span>
 			<span class="nav-brand-en transition-colors group-hover:text-gold-deep">
 				{SITE_NAME_EN}
