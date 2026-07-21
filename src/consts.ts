@@ -4,7 +4,7 @@ export const SITE_BRAND = "抱元守一";
 export const SITE_TITLE = "抱一";
 export const SITE_NAME_EN = "BaoYuanSoYi";
 export const SITE_DESCRIPTION =
-	"抱元守一——在月光下的寧靜裡，找回身體的自主權。載體重啟 · 生活美學 · 頻率對位。";
+"首席人生載體顧問｜載體重啟 · 生活美學 · 頻率對位。透過簡單的調整與練習，邀請您一同探索元氣與自主權。源自個人生命實證，歡迎有緣人前來深度交流。";
 export const SITE_TAGLINE_SUB = "在月光下的寧靜裡，找回身體的自主權。";
 /** 首頁詩意：第一句單獨一列 */
 export const SITE_HERO_LINE_1 = "在月光下的寧靜裡，找回身體的自主權。";
