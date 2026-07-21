@@ -1,62 +1,60 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ABOUT_STORY, BOOKING_COPY, SITE_ROLE } from '../consts';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
+<BaseLayout
+	title={ABOUT_STORY.title}
+	description="從嚴重貧血、長期低潮與憂鬱，到心臟驟停——抱元守一主理人的真實故事。"
 >
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+	<section class="page-shell py-16 md:py-24">
+		<div class="mx-auto max-w-3xl text-center">
+			<p class="section-label animate-fade-rise">真實</p>
+			<h1 class="font-lishu animate-fade-rise animate-delay-1">{ABOUT_STORY.title}</h1>
+			<div class="ink-divider" aria-hidden="true"><span></span></div>
+		</div>
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<div class="mx-auto mt-2 max-w-2xl space-y-8">
+			<p class="text-center text-lg tracking-[0.12em] text-ink-faint md:text-xl font-heiti">
+				{ABOUT_STORY.leadLines[0]}
+				<br />
+				{ABOUT_STORY.leadLines[1]}
+			</p>
+			{
+				ABOUT_STORY.paragraphs.slice(1).map((p) => (
+					<p class="text-base leading-relaxed tracking-[0.04em] text-ink-soft font-heiti md:text-lg md:leading-[2]">
+						{p.includes('自主權') ? (
+							p.split(/(自主權。?)/g).map((part) =>
+								part.startsWith('自主權') ? (
+									<span class="whitespace-nowrap">{part}</span>
+								) : (
+									part
+								),
+							)
+						) : (
+							p
+						)}
+					</p>
+				))
+			}
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<div class="paper-card mt-6 px-8 py-10 text-center">
+				<p class="font-lishu !text-lg !tracking-[0.18em] text-ink">{SITE_ROLE}</p>
+				<p class="mt-4 text-base tracking-[0.04em] text-ink-mute font-heiti">
+					找自己 → 救自己 → 養自己 → 愛自己
+				</p>
+			</div>
+		</div>
+	</section>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
-
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+	<section class="border-t border-paper-edge/45 bg-blush-soft/20">
+		<div class="page-shell py-16 text-center md:py-20">
+			<p class="section-label">下一步</p>
+			<h2 class="font-lishu">核心理念</h2>
+			<div class="mt-10 flex flex-wrap justify-center gap-4">
+				<a href="/philosophy" class="btn-ghost">閱讀理念</a>
+				<a href={BOOKING_COPY.href} class="btn-ritual">{BOOKING_COPY.cta}</a>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PHILOSOPHY_PILLARS, BOOKING_COPY, SITE_HERO_VERSE } from '../consts';
+---
+
+<BaseLayout
+	title="核心理念"
+	description="抱元守一核心理念：回歸初始、身體自主權、載體重啟。"
+>
+	<section class="page-shell py-16 md:py-24">
+		<div class="mx-auto max-w-3xl text-center">
+			<p class="section-label animate-fade-rise">理念</p>
+			<h1 class="font-lishu animate-fade-rise animate-delay-1">核心理念</h1>
+			<div class="ink-divider" aria-hidden="true"><span></span></div>
+		</div>
+
+		<div class="mx-auto mt-6 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-12">
+			{
+				PHILOSOPHY_PILLARS.map((p) => (
+					<article class="paper-card flex flex-col px-8 py-12 text-center">
+						<h2 class="font-lishu !text-2xl !tracking-[0.22em] text-ink">{p.title}</h2>
+						<div
+							class="mx-auto mt-5 h-px w-10 bg-gradient-to-r from-transparent via-peach-soft to-transparent"
+							aria-hidden="true"
+						/>
+						<p class="mt-6 flex-1 text-base leading-relaxed tracking-[0.04em] text-ink-mute font-heiti">
+							{p.body}
+						</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="border-y border-paper-edge/45 bg-blush-soft/25">
+		<div class="page-shell py-20 md:py-28">
+			<div class="mx-auto max-w-2xl text-center">
+				<blockquote class="paper-card px-8 py-12 md:px-14">
+					<p class="text-base leading-[2.1] tracking-[0.06em] text-ink-soft font-heiti md:text-lg md:leading-[2.15]">
+						{SITE_HERO_VERSE}
+					</p>
+				</blockquote>
+			</div>
+		</div>
+	</section>
+
+	<section class="page-shell py-16 text-center md:py-24">
+		<p class="section-label">重啟</p>
+		<h2 class="font-lishu">{BOOKING_COPY.title}</h2>
+		<div class="mt-10 flex flex-wrap justify-center gap-4">
+			<a href="/about" class="btn-ghost">真實故事</a>
+			<a href={BOOKING_COPY.href} class="btn-ritual">{BOOKING_COPY.cta}</a>
+		</div>
+	</section>
+</BaseLayout>

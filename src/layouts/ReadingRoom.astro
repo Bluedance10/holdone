@@ -1,0 +1,159 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { BOOKING_COPY } from '../consts';
+
+type Props = CollectionEntry<'blog'>['data'] & {
+	backHref?: string;
+	backLabel?: string;
+};
+
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	backHref = '/manuscripts',
+	backLabel = '返回生命手稿',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead title={title} description={description} image={heroImage} />
+	</head>
+	<body class="reading-room flex min-h-screen flex-col">
+		<header
+			class="sticky top-0 z-40 border-b border-paper-edge/40 bg-paper/82 backdrop-blur-md transition-all duration-350"
+			id="room-header"
+		>
+			<div
+				class="mx-auto flex max-w-[var(--max-w-room)] items-center justify-between gap-4 px-5 py-3.5 md:px-6"
+			>
+				<a
+					href={backHref}
+					class="flex items-center gap-2 text-base font-medium tracking-[0.12em] text-ink-mute no-underline transition-colors hover:text-peach-deep font-heiti"
+				>
+					<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+						<path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+					{backLabel}
+				</a>
+
+				<div class="flex items-center gap-3">
+					<button
+						type="button"
+						id="focus-toggle"
+						class="rounded-full border border-paper-edge bg-paper/60 px-3 py-1.5 text-sm font-medium tracking-[0.14em] text-ink-mute transition-colors hover:border-peach hover:bg-blush-soft/50 hover:text-peach-deep font-heiti"
+						aria-pressed="false"
+						title="專注模式：沉浸閱讀"
+					>
+						專注模式
+					</button>
+					<a
+						href="/"
+						class="nav-brand !text-base text-ink no-underline hover:text-peach-deep sm:!text-lg"
+					>
+						抱元守一
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="flex-1 px-5 py-12 md:px-6 md:py-16">
+			<article class="mx-auto max-w-[var(--max-w-room)] animate-fade-rise">
+				{
+					heroImage && (
+						<figure class="mb-12 overflow-hidden rounded-lg border border-paper-edge/45 shadow-sm">
+							<img
+								src={heroImage}
+								alt=""
+								width={1020}
+								height={510}
+								class="aspect-[2/1] w-full object-cover"
+							/>
+						</figure>
+					)
+				}
+
+				<header class="mb-12 text-center">
+					<p class="section-label">閱讀密室 · Reading Room</p>
+					<h1 class="font-lishu text-ink !tracking-[0.18em]">{title}</h1>
+					<div class="mt-6 flex flex-col items-center gap-1 text-base tracking-[0.1em] text-ink-mute font-heiti">
+						<FormattedDate date={pubDate} />
+						{
+							updatedDate && (
+								<p class="text-sm text-ink-faint">
+									修訂於 <FormattedDate date={updatedDate} />
+								</p>
+							)
+						}
+					</div>
+					<div class="ink-divider" aria-hidden="true">
+						<span></span>
+					</div>
+				</header>
+
+				<div class="prose-room">
+					<slot />
+				</div>
+
+				<footer class="mt-20 border-t border-paper-edge/55 pt-10 text-center">
+					<p class="mb-6 text-base tracking-[0.1em] text-ink-mute font-heiti">
+						願這段文字，成為你片刻的安住。
+					</p>
+					<div class="flex flex-wrap items-center justify-center gap-4">
+						<a href={backHref} class="btn-ghost">更多手稿</a>
+						<a href={BOOKING_COPY.href} class="btn-ritual">{BOOKING_COPY.cta}</a>
+					</div>
+				</footer>
+			</article>
+		</main>
+
+		<footer class="border-t border-paper-edge/35 py-8 text-center text-sm tracking-[0.14em] text-ink-faint font-heiti">
+			<a href="/" class="text-ink-mute no-underline hover:text-peach-deep">抱元守一</a>
+			<span class="mx-2">·</span>
+			閱讀密室
+		</footer>
+
+		<script>
+			const btn = document.getElementById('focus-toggle');
+			const header = document.getElementById('room-header');
+			let focused = false;
+
+			function applyFocus(on: boolean) {
+				if (!btn || !header) return;
+				btn.setAttribute('aria-pressed', String(on));
+				btn.textContent = on ? '退出專注' : '專注模式';
+				document.body.classList.toggle('is-focused', on);
+				header.style.opacity = on ? '0' : '1';
+				header.style.pointerEvents = on ? 'none' : 'auto';
+				header.style.transform = on ? 'translateY(-100%)' : 'translateY(0)';
+			}
+
+			btn?.addEventListener('click', () => {
+				focused = !focused;
+				applyFocus(focused);
+			});
+
+			document.addEventListener('mousemove', (e) => {
+				if (!focused || !header) return;
+				if (e.clientY < 56) {
+					header.style.opacity = '1';
+					header.style.pointerEvents = 'auto';
+					header.style.transform = 'translateY(0)';
+				}
+			});
+
+			window.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && focused) {
+					focused = false;
+					applyFocus(false);
+				}
+			});
+		</script>
+	</body>
+</html>

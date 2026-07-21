@@ -1,50 +1,219 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+	SITE_BRAND,
+	SITE_DESCRIPTION,
+	SITE_HERO_LINE_1,
+	SITE_HERO_LINE_2,
+	SITE_HERO_LINE_3,
+	SITE_ROLE,
+	SITE_PILLARS_LINE,
+	SITE_ORIGIN,
+	SITE_MISSION,
+	ABOUT_STORY,
+	PHILOSOPHY_PILLARS,
+	BOOKING_COPY,
+} from '../consts';
+
+const storyRest = ABOUT_STORY.paragraphs.slice(1);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
+<BaseLayout title={SITE_BRAND} description={SITE_DESCRIPTION}>
+	<!-- 始源 · 抱元守一 -->
+	<section class="relative overflow-hidden">
+		<div
+			class="page-shell flex min-h-[78vh] flex-col items-center justify-center py-20 text-center md:min-h-[86vh] md:py-28"
+		>
+			<h1 class="title-brand animate-fade-rise text-ink">
+				{SITE_BRAND}
+			</h1>
+
+			<!-- 第一句：單獨一列、稍大、顏色較淺 -->
+			<p
+				class="hero-verse-lead animate-fade-rise animate-delay-1 mx-auto mt-10 max-w-2xl text-lg tracking-[0.12em] text-ink-faint md:text-xl md:tracking-[0.14em] font-heiti"
+			>
+				{SITE_HERO_LINE_1}
 			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
+
+			<!-- 詩意二、三句 + 抱一源起：統一適中行高 -->
+			<div
+				class="hero-verse-block animate-fade-rise animate-delay-2 mx-auto mt-8 max-w-xl text-base tracking-[0.06em] text-ink-mute md:text-[1.05rem] font-heiti"
+			>
+				<p>{SITE_HERO_LINE_2}</p>
+				<p>{SITE_HERO_LINE_3}</p>
+			</div>
+
+			<div class="ink-divider mt-12" aria-hidden="true">
+				<span></span>
+			</div>
+
+			<p
+				class="animate-fade-rise animate-delay-3 font-lishu text-base tracking-[0.22em] text-ink md:text-lg"
+			>
+				{SITE_ROLE}
 			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
+			<p
+				class="animate-fade-rise animate-delay-3 mt-4 text-sm tracking-[0.22em] text-gold-deep md:text-base md:tracking-[0.28em] font-heiti"
+			>
+				{SITE_PILLARS_LINE}
 			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
+
+			<div
+				class="hero-verse-block animate-fade-rise animate-delay-3 mx-auto mt-10 max-w-lg text-base tracking-[0.04em] text-ink-mute font-heiti"
+			>
+				<p>{SITE_ORIGIN}</p>
+				<p>{SITE_MISSION}</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 我的真實故事 -->
+	<section id="about" class="border-y border-paper-edge/45 bg-blush-soft/15">
+		<div class="page-shell py-16 md:py-20">
+			<div class="mx-auto max-w-2xl">
+				<h2 class="font-lishu text-center !text-xl !tracking-[0.2em] md:!text-2xl">
+					{ABOUT_STORY.title}
+				</h2>
+				<div class="ink-divider !my-6" aria-hidden="true"><span></span></div>
+
+				<!-- 第一段：固定兩行 · 與月光句同色同大小 -->
+				<p
+					class="hero-verse-lead mx-auto max-w-2xl text-center text-lg tracking-[0.12em] text-ink-faint md:text-xl md:tracking-[0.14em] font-heiti"
+				>
+					{ABOUT_STORY.leadLines[0]}
+					<br />
+					{ABOUT_STORY.leadLines[1]}
+				</p>
+
+				<!-- 後續剛好六列：一列一段、置中、緊湊 -->
+				<div class="story-body-six mx-auto mt-6 text-center">
+					{
+						storyRest.map((p) => {
+							const parts = p.split(/(自主權。?)/g);
+							return (
+								<p>
+									{parts.map((part) =>
+										part.startsWith('自主權') ? (
+											<span class="whitespace-nowrap">{part}</span>
+										) : (
+											part
+										),
+									)}
+								</p>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<style>
+		/* 詩意句與「抱一，源自…」統一適中行高 */
+		.hero-verse-block {
+			line-height: 1.75;
+		}
+		.hero-verse-block p {
+			margin: 0;
+			padding: 0;
+			line-height: 1.75;
+		}
+
+		/* 故事正文六列 · 字級放大 */
+		.story-body-six {
+			max-width: min(52rem, 100%);
+			font-family: var(--font-body);
+			color: var(--color-ink-soft);
+			font-size: 1rem;
+			letter-spacing: 0.03em;
+			line-height: 1.7;
+		}
+		.story-body-six p {
+			margin: 0;
+			padding: 0;
+			line-height: 1.7;
+		}
+		@media (min-width: 900px) {
+			.story-body-six {
+				font-size: 1.0625rem;
+				line-height: 1.75;
+			}
+			.story-body-six p {
+				white-space: nowrap;
+			}
+		}
+		@media (max-width: 899px) {
+			.story-body-six {
+				font-size: 0.95rem;
+			}
+			.story-body-six p {
+				white-space: normal;
+				line-height: 1.65;
+				margin-bottom: 0.2em;
+			}
+		}
+	</style>
+
+	<!-- 核心理念 -->
+	<section id="philosophy" class="page-shell py-20 md:py-28">
+		<div class="mx-auto max-w-3xl text-center">
+			<h2 class="font-lishu">核心理念</h2>
+			<div class="ink-divider" aria-hidden="true"><span></span></div>
+		</div>
+
+		<div class="mx-auto mt-4 grid max-w-5xl gap-10 md:grid-cols-3 md:gap-12">
+			{
+				PHILOSOPHY_PILLARS.map((item) => (
+					<article class="paper-card flex flex-col px-8 py-12 text-center">
+						<h3 class="font-lishu !text-xl !tracking-[0.24em] text-ink">{item.title}</h3>
+						<div
+							class="mx-auto mt-5 h-px w-10 bg-gradient-to-r from-transparent via-peach-soft to-transparent"
+							aria-hidden="true"
+						/>
+						<p class="mt-6 flex-1 text-base leading-relaxed tracking-[0.04em] text-ink-mute font-heiti">
+							{item.body}
+						</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- 生命手稿 · 敬請期待 -->
+	<section class="border-y border-paper-edge/45 bg-paper-warm/30">
+		<div class="page-shell py-20 md:py-28">
+			<div class="mx-auto max-w-2xl text-center">
+				<h2 class="font-lishu">生命手稿分享</h2>
+				<div
+					class="paper-card mt-10 px-8 py-14 md:px-12"
+					style="background: linear-gradient(160deg, color-mix(in srgb, var(--color-peach-btn) 40%, white), var(--color-paper));"
+				>
+					<span class="badge-soon">Coming Soon</span>
+					<p class="font-lishu mt-8 !text-xl !tracking-[0.24em] text-ink md:!text-2xl">
+						敬請期待
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 聖殿重啟 -->
+	<section class="page-shell py-20 md:py-28">
+		<div
+			class="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-paper-edge/50 px-8 py-16 text-center md:px-16 md:py-20"
+			style="background: linear-gradient(145deg, color-mix(in srgb, var(--color-peach-btn) 35%, var(--color-paper)), var(--color-paper));"
+		>
+			<h2 class="font-lishu text-ink">{BOOKING_COPY.title}</h2>
+			<p class="mx-auto mt-8 max-w-lg text-base leading-relaxed tracking-[0.04em] text-ink-mute font-heiti md:text-lg">
+				{BOOKING_COPY.body}
 			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+			<p class="mx-auto mt-4 max-w-lg text-base leading-relaxed tracking-[0.04em] text-ink-mute font-heiti md:text-lg">
+				{BOOKING_COPY.body2}
+			</p>
+			<p class="mx-auto mt-6 text-sm tracking-[0.1em] text-gold-deep font-heiti">
+				{BOOKING_COPY.note}
+			</p>
+			<a href={BOOKING_COPY.href} class="btn-ritual mt-10">{BOOKING_COPY.cta}</a>
+		</div>
+	</section>
+</BaseLayout>

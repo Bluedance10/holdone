@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { FAQ_ITEMS, BOOKING_COPY } from '../consts';
+---
+
+<BaseLayout
+	title="常見問題"
+	description="抱一常見問題——服務內容、預約名額、所需資料與服務形式。"
+>
+	<section class="page-shell py-16 md:py-24">
+		<div class="mx-auto max-w-3xl text-center">
+			<p class="section-label animate-fade-rise">FAQ</p>
+			<h1 class="font-lishu animate-fade-rise animate-delay-1">常見問題</h1>
+			<div class="ink-divider" aria-hidden="true"><span></span></div>
+		</div>
+
+		<ul class="mx-auto mt-6 max-w-2xl space-y-6">
+			{
+				FAQ_ITEMS.map((item, i) => (
+					<li class="paper-card px-7 py-8 md:px-9">
+						<h2 class="font-lishu !text-lg !tracking-[0.12em] text-ink">
+							Q{i + 1}：{item.q}
+						</h2>
+						<p class="mt-4 text-base leading-relaxed tracking-[0.04em] text-ink-mute font-heiti">
+							{item.a}
+						</p>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="mt-16 flex flex-wrap justify-center gap-4">
+			<a href="/privacy" class="btn-ghost">隱私權</a>
+			<a href="/terms" class="btn-ghost">服務條款</a>
+			<a href={BOOKING_COPY.href} class="btn-ritual">{BOOKING_COPY.cta}</a>
+		</div>
+	</section>
+</BaseLayout>

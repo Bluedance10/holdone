@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BOOKING_COPY } from '../consts';
+---
+
+<BaseLayout
+	title={BOOKING_COPY.title}
+	description="聖殿重啟——預約抱元守一私密席位。客製化服務，每月僅開放 5 席，高敏者優先。"
+>
+	<section class="page-shell py-16 md:py-24">
+		<div class="mx-auto max-w-3xl text-center">
+			<p class="section-label animate-fade-rise">重啟</p>
+			<h1 class="font-lishu animate-fade-rise animate-delay-1">{BOOKING_COPY.title}</h1>
+			<p
+				class="animate-fade-rise animate-delay-2 mx-auto mt-10 max-w-xl text-base leading-relaxed tracking-[0.05em] text-ink-mute font-heiti md:text-lg"
+			>
+				{BOOKING_COPY.body}
+			</p>
+			<p
+				class="animate-fade-rise animate-delay-2 mx-auto mt-4 max-w-xl text-base leading-relaxed tracking-[0.05em] text-ink-mute font-heiti md:text-lg"
+			>
+				{BOOKING_COPY.body2}
+			</p>
+			<p class="mt-8 text-sm tracking-[0.1em] text-gold-deep font-heiti">
+				{BOOKING_COPY.note}
+			</p>
+			<div class="ink-divider" aria-hidden="true"><span></span></div>
+		</div>
+
+		<div class="mx-auto mt-4 max-w-xl">
+			<form
+				class="paper-card space-y-6 px-7 py-10 md:px-10"
+				method="POST"
+				action="#"
+				id="booking-form"
+			>
+				<div class="field">
+					<label for="name">姓名</label>
+					<input type="text" id="name" name="name" required autocomplete="name" placeholder="您的姓名" />
+				</div>
+
+				<div class="field">
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" required autocomplete="email" placeholder="name@example.com" />
+				</div>
+
+				<div class="field">
+					<label for="phone">電話</label>
+					<input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="聯絡電話" />
+				</div>
+
+				<div class="field">
+					<label for="birthday">生日</label>
+					<input type="date" id="birthday" name="birthday" />
+				</div>
+
+				<div class="field">
+					<label for="message">現況描述</label>
+					<textarea
+						id="message"
+						name="message"
+						required
+						placeholder="請簡單描述您目前的狀態與期待……"
+					></textarea>
+				</div>
+
+				<div class="pt-2 text-center">
+					<button type="submit" class="btn-ritual w-full cursor-pointer border-0 sm:w-auto">
+						{BOOKING_COPY.cta}
+					</button>
+				</div>
+
+				<p class="text-center text-sm tracking-[0.08em] text-ink-faint font-heiti">
+					送出即表示您已閱讀並同意
+					<a href="/privacy">隱私權政策</a>
+					與
+					<a href="/terms">服務條款</a>。
+				</p>
+				<p class="pt-2 text-center">
+					<a href={BOOKING_COPY.href} class="btn-ritual">{BOOKING_COPY.cta}</a>
+				</p>
+			</form>
+
+			<div id="form-thanks" class="paper-card mt-8 hidden px-8 py-16 text-center">
+				<p class="font-lishu text-2xl tracking-[0.24em] text-ink">已收到您的預約</p>
+				<p class="mt-6 text-base leading-relaxed tracking-[0.05em] text-ink-mute font-heiti">
+					我方將盡快安排並與您聯繫。<br />
+					每月席位有限，感謝您的耐心。
+				</p>
+				<a href="/" class="btn-ghost mt-10 inline-flex">回到始源</a>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		const form = document.getElementById('booking-form');
+		const thanks = document.getElementById('form-thanks');
+		form?.addEventListener('submit', (e) => {
+			e.preventDefault();
+			form.classList.add('hidden');
+			thanks?.classList.remove('hidden');
+		});
+	</script>
+</BaseLayout>
