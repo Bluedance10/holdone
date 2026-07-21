@@ -9,7 +9,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://baoyuansoyi.bluedance.com.tw",
+  site: "https://baoyuansoyi.com",
   integrations: [mdx(), sitemap()],
 
   adapter: cloudflare({
