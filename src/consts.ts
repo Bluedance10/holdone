@@ -32,7 +32,7 @@ export const SITE_EMAIL = "service@bluedance.com.tw";
 export const SITE_MAILTO = `mailto:${SITE_EMAIL}`;
 /** 正式網址（未來導向／sitemap），頁面不顯示 */
 export const SITE_URL = "https://baoyuansoyi.bluedance.com.tw";
-export const SITE_COPYRIGHT = `Copyright©2026 抱一 BaoYuanSoYi ${SITE_COMPANY} 版權所有`;
+export const SITE_COPYRIGHT = `Copyright©2026 抱一 ${SITE_COMPANY} 版權所有`;
 
 export const NAV_LINKS = [
 	{ href: "/", label: "始源" },
